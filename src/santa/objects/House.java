@@ -1,6 +1,6 @@
 package santa.objects;
 
-public class House extends Point{
+public class House extends Point {
     public House(int x, int y) {
         super(x, y);
     }

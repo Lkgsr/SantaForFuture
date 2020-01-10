@@ -4,7 +4,7 @@ public class Point {
     private int x, y;
     private int step = 0;
 
-    public Point(int x, int y){
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -15,9 +15,13 @@ public class Point {
         this.step = p.step;
     }
 
-    public int getStep(){return step;}
+    public int getStep() {
+        return step;
+    }
 
-    public void step(){step++;}
+    public void step() {
+        step++;
+    }
 
     public int getX() {
         return x;

@@ -1,6 +1,6 @@
 package santa.objects;
 
-public class Path extends Point{
+public class Path extends Point {
 
 
     public Path(int x, int y) {

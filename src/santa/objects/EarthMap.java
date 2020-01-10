@@ -1,8 +1,9 @@
 package santa.objects;
 
 import santa.exceptions.TheMapIsToSmallForAllTheHousesAndObstaclesException;
-import santa.objects.*;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import static santa.tools.Tools.deepCopy;
 
@@ -18,48 +19,48 @@ public class EarthMap {
         this.width = width;
         this.height = height;
         this.map = new Point[height][width];
-        if (houses+obstacle  >= width*height){
-            int houseObstacle = houses+obstacle;
-            throw new TheMapIsToSmallForAllTheHousesAndObstaclesException("Houses + Obstacle " + houseObstacle + " >= " + "width*height " + width*height);
+        if (houses + obstacle >= width * height) {
+            int houseObstacle = houses + obstacle;
+            throw new TheMapIsToSmallForAllTheHousesAndObstaclesException("Houses + Obstacle " + houseObstacle + " >= " + "width*height " + width * height);
         }
         placeHousesOrObstacle(houses, true);
         placeHousesOrObstacle(obstacle, false);
         filNullWithSpace();
     }
 
-    private void placeHousesOrObstacle(int count, boolean type){
-        for (int i=0;i<count;i++){
+    private void placeHousesOrObstacle(int count, boolean type) {
+        for (int i = 0; i < count; i++) {
             int y = rand.nextInt(this.height);
             int x = rand.nextInt(this.width);
-            while (getMapValue(x, y) != null){
+            while (getMapValue(x, y) != null) {
                 y = rand.nextInt(this.height);
                 x = rand.nextInt(this.width);
             }
-            if (type){
-                House h = new House(x,y);
+            if (type) {
+                House h = new House(x, y);
                 setMapValue(x, y, h);
                 this.houses.add(h);
-            }else{
+            } else {
                 setMapValue(x, y, new Obstacle(x, y));
             }
         }
     }
 
-    private void filNullWithSpace(){
-        for (int x=0; x<this.width;x++){
-            for (int y=0; y<this.height; y++){
-                if (getMapValue(x, y) == null){
+    private void filNullWithSpace() {
+        for (int x = 0; x < this.width; x++) {
+            for (int y = 0; y < this.height; y++) {
+                if (getMapValue(x, y) == null) {
                     setMapValue(x, y, new Space(x, y));
                 }
             }
         }
     }
 
-    public void setMapValue(int x, int y, Point value){
+    public void setMapValue(int x, int y, Point value) {
         this.map[y][x] = value;
     }
 
-    public Point getMapValue(int x, int y){
+    public Point getMapValue(int x, int y) {
         return this.map[y][x];
     }
 
@@ -106,5 +107,7 @@ public class EarthMap {
         return (ArrayList<Point>) houses.clone();
     }
 
-    public Point[][] getMap(){ return deepCopy(this.map);}
+    public Point[][] getMap() {
+        return deepCopy(this.map);
+    }
 }
